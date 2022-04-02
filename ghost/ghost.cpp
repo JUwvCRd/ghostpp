@@ -354,6 +354,8 @@ int main( int argc, char **argv )
 
 	gGHost = new CGHost( &CFG );
 
+	gGHost->CreateGame( gGHost->m_Map, GAME_PRIVATE, false, "本地遊戲（slyh）", "slyh", "slyh", string( ), false );
+
 	while( 1 )
 	{
 		// block for 50ms on all sockets - if you intend to perform any timed actions more frequently you should change this

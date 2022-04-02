@@ -659,11 +659,11 @@ void CUDPSocket :: SetBroadcastTarget( string subnet )
 
 		// if conversion fails, inet_addr( ) returns INADDR_NONE
 
-		if( m_BroadcastTarget.s_addr == INADDR_NONE )
-		{
-			CONSOLE_Print( "[UDPSOCKET] invalid broadcast target, using default broadcast target" );
-			m_BroadcastTarget.s_addr = INADDR_BROADCAST;
-		}
+		// if( m_BroadcastTarget.s_addr == INADDR_NONE )
+		// {
+		// 	CONSOLE_Print( "[UDPSOCKET] invalid broadcast target, using default broadcast target" );
+		// 	m_BroadcastTarget.s_addr = INADDR_BROADCAST;
+		// }
 	}
 }
 

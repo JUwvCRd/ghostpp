@@ -354,7 +354,7 @@ int main( int argc, char **argv )
 
 	gGHost = new CGHost( &CFG );
 
-	gGHost->CreateGame( gGHost->m_Map, GAME_PRIVATE, false, "本地遊戲（slyh）", "slyh", "slyh", string( ), false );
+	gGHost->CreateGame( gGHost->m_Map, GAME_PRIVATE, false, "本地遊戲（BN紅茶）", "BN紅茶", "BN紅茶", string( ), false );
 
 	while( 1 )
 	{

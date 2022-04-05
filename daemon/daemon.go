@@ -76,7 +76,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if m.Content == "/start" {
 		if ghostInstance.status == GHOST_STATUS_RUNNING {
-			m, err := s.ChannelMessageSend(m.ChannelID, "Terminating existing Ghost instance...")
+			_, err := s.ChannelMessageSend(m.ChannelID, "Terminating existing Ghost instance...")
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -86,7 +86,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			time.Sleep(10 * time.Second)
 
 			if ghostInstance.status != GHOST_STATUS_NOT_RUNNING {
-				m, err := s.ChannelMessageSend(m.ChannelID, "Failed to terminate Ghost, try again later.")
+				_, err := s.ChannelMessageSend(m.ChannelID, "Failed to terminate Ghost, try again later.")
 				if err != nil {
 					fmt.Println(err)
 				}
@@ -96,14 +96,14 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		ghostInstance.mu.Lock()
 		if ghostInstance.status == GHOST_STATUS_NOT_RUNNING {
-			m, err := s.ChannelMessageSend(m.ChannelID, "Starting Ghost...")
+			_, err := s.ChannelMessageSend(m.ChannelID, "Starting Ghost...")
 			if err != nil {
 				fmt.Println(err)
 			}
 
 			go startGhost()
 		} else {
-			m, err := s.ChannelMessageSend(m.ChannelID, "Something went wrong, try again later.")
+			_, err := s.ChannelMessageSend(m.ChannelID, "Something went wrong, try again later.")
 			if err != nil {
 				fmt.Println(err)
 			}

@@ -84,7 +84,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 			terminateGhost()
 
-			time.Sleep(10 * time.Second)
+			time.Sleep(5 * time.Second)
 
 			if ghostInstance.status != GHOST_STATUS_NOT_RUNNING {
 				_, err := s.ChannelMessageSend(m.ChannelID, "Failed to terminate Ghost, try again later.")
@@ -121,7 +121,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 			terminateGhost()
 
-			time.Sleep(10 * time.Second)
+			time.Sleep(5 * time.Second)
 
 			if ghostInstance.status != GHOST_STATUS_NOT_RUNNING {
 				_, err := s.ChannelMessageSend(m.ChannelID, "Failed to terminate Ghost, try again later.")

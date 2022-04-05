@@ -173,14 +173,14 @@ func startGhost() {
 	ghostInstance.cmd = exec.Command("./ghost++")
 	err := ghostInstance.cmd.Start()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 
 	ghostInstance.setStatus(GHOST_STATUS_RUNNING)
 
 	err = ghostInstance.cmd.Wait()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 
 	ghostInstance.setStatus(GHOST_STATUS_NOT_RUNNING)
@@ -190,6 +190,6 @@ func terminateGhost() {
 	if ghostInstance.cmd != nil {
 		ghostInstance.cmd.Process.Kill()
 	} else {
-		log.Fatal("ghostInstance.cmd is nil")
+		log.Println("ghostInstance.cmd is nil")
 	}
 }

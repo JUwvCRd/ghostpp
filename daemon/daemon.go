@@ -31,6 +31,7 @@ func (g *Ghost) setStatus(status int) {
 }
 
 var ghostInstance = Ghost{
+	cmd:    nil,
 	status: GHOST_STATUS_NOT_RUNNING,
 }
 
@@ -110,6 +111,60 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 		ghostInstance.mu.Unlock()
 	}
+
+	if m.Content == "/stop" {
+		if ghostInstance.status == GHOST_STATUS_RUNNING {
+			_, err := s.ChannelMessageSend(m.ChannelID, "Terminating existing Ghost instance...")
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			terminateGhost()
+
+			time.Sleep(10 * time.Second)
+
+			if ghostInstance.status != GHOST_STATUS_NOT_RUNNING {
+				_, err := s.ChannelMessageSend(m.ChannelID, "Failed to terminate Ghost, try again later.")
+				if err != nil {
+					fmt.Println(err)
+				}
+			} else {
+				_, err := s.ChannelMessageSend(m.ChannelID, "Ghost terminated.")
+				if err != nil {
+					fmt.Println(err)
+				}
+			}
+		} else if ghostInstance.status == GHOST_STATUS_STARTING {
+			_, err := s.ChannelMessageSend(m.ChannelID, "Ghost is still starting, try again later.")
+			if err != nil {
+				fmt.Println(err)
+			}
+		} else if ghostInstance.status == GHOST_STATUS_NOT_RUNNING {
+			_, err := s.ChannelMessageSend(m.ChannelID, "Ghost is not running.")
+			if err != nil {
+				fmt.Println(err)
+			}
+		}
+	}
+
+	if m.Content == "/status" {
+		if ghostInstance.status == GHOST_STATUS_RUNNING {
+			_, err := s.ChannelMessageSend(m.ChannelID, "Ghost is running.")
+			if err != nil {
+				fmt.Println(err)
+			}
+		} else if ghostInstance.status == GHOST_STATUS_STARTING {
+			_, err := s.ChannelMessageSend(m.ChannelID, "Ghost is starting.")
+			if err != nil {
+				fmt.Println(err)
+			}
+		} else if ghostInstance.status == GHOST_STATUS_NOT_RUNNING {
+			_, err := s.ChannelMessageSend(m.ChannelID, "Ghost is not running.")
+			if err != nil {
+				fmt.Println(err)
+			}
+		}
+	}
 }
 
 func startGhost() {
@@ -132,5 +187,9 @@ func startGhost() {
 }
 
 func terminateGhost() {
-	ghostInstance.cmd.Process.Kill()
+	if ghostInstance.cmd != nil {
+		ghostInstance.cmd.Process.Kill()
+	} else {
+		log.Fatal("ghostInstance.cmd is nil")
+	}
 }

@@ -35,7 +35,7 @@ var ghostInstance = Ghost{
 }
 
 func main() {
-	go discord()
+	discord()
 }
 
 func discord() {

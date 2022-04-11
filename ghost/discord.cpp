@@ -75,7 +75,7 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t _channel_id) {
 
     std::size_t payload_start_pos = event.msg.content.find(" ");
     if (payload_start_pos != std::string::npos) {
-      payload = event.msg.content.substr(payload_start_pos);
+      payload = event.msg.content.substr(payload_start_pos + 1);
     }
 
     command = command.substr(1);

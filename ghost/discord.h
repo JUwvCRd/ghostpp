@@ -23,13 +23,14 @@
 
 class CDiscord {
   public:
-    void CDiscord(CGHost *nGHost, string token, uint64_t channel_id);
+    CDiscord(CGHost *nGHost, string token, uint64_t channel_id);
     void SendChat(string message);
 
   protected:
     dpp::cluster bot;
     dpp::snowflake channel_id;
     CGHost *m_GHost;
+    std::string player;
     void EventPlayerBotCommand(string player, string command, string payload);
 }
 

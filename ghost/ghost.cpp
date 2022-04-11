@@ -355,7 +355,13 @@ int main( int argc, char **argv )
 
 	gGHost = new CGHost( &CFG );
 
-	gGHost->CreateGame( gGHost->m_Map, GAME_PRIVATE, false, "本地遊戲（slyh）", "slyh", "slyh", string( ), false );
+	string gDiscordBotToken = CFG->GetString("discord_bot_token", string());
+	uint64_t gDiscordChannelId = std::stoull(CFG->GetString("discord_channel_id", "0"), NULL, 10);
+
+	if (gDiscordBotToken.length() > 0) {
+		CONSOLE_Print("[DISCORD] Listening to Discord channel " + gDiscordChannelId);
+		std::unique_ptr<CDiscord> gDiscord = std::make_unique<CDiscord>(gGHost, gDiscordBotToken, gDiscordChannelId);
+	}
 
 	while( 1 )
 	{
@@ -675,7 +681,6 @@ CGHost :: CGHost( CConfig *CFG )
 	LoadIPToCountryData( );
 
 	// create the admin game
-	new CDiscord(this, "token", "channel_id");
 
 	if( m_AdminGameCreate )
 	{

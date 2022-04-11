@@ -51,7 +51,7 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t channel_id) {
 
   player = "";
 
-  bot.on_message_create([&, &bot](const dpp::message_create_t & event) {
+  bot.on_message_create([&](const dpp::message_create_t & event) {
     if (event.msg.channel_id == 0) {
       return;
     }

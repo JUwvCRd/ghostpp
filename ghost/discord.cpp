@@ -80,6 +80,11 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t _channel_id) {
 
     command = command.substr(1);
 
+    if (command == "player") {
+      player = payload;
+      bot->message_create(dpp::message(event.msg.channel_id, "Username set: " + player));
+    }
+
     if (player.length() < 1 && command != "player") {
       bot->message_create(dpp::message(event.msg.channel_id, "Please set your username.\nCommand: /player <name>"));
       return;

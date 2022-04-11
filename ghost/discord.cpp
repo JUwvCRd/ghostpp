@@ -47,7 +47,7 @@ using namespace boost::filesystem;
 CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t channel_id) {
   m_GHost = nGHost;
 
-	bot = new dpp::cluster(token, dpp::i_default_intents | dpp::i_message_content);
+	dpp::cluster bot(token, dpp::i_default_intents | dpp::i_message_content);
 
   player = "";
 

@@ -26,6 +26,7 @@
 class CDiscord {
   public:
     CDiscord(CGHost *nGHost, string token, uint64_t channel_id);
+    ~CDiscord();
     void SendChat(string message);
 
   protected:

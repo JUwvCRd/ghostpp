@@ -73,17 +73,17 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t _channel_id) {
       return;
     }
 
-    if (player.length() < 1) {
-      bot->message_create(dpp::message(event.msg.channel_id, "Please set your username.\nCommand: /player <name>"));
-      return;
-    }
-
     std::size_t payload_start_pos = command.find(" ");
     if (payload_start_pos != std::string::npos) {
       payload = command.substr(payload_start_pos);
     }
 
     command = command.substr(1);
+
+    if (player.length() < 1 && command != "player") {
+      bot->message_create(dpp::message(event.msg.channel_id, "Please set your username.\nCommand: /player <name>"));
+      return;
+    }
 
     EventPlayerBotCommand(command, payload);
   });

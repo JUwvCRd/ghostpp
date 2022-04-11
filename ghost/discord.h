@@ -32,6 +32,11 @@ class CDiscord {
     dpp::cluster bot;
     dpp::snowflake channel_id;
     CGHost *m_GHost;
+    vector<PairedAdminAdd> m_PairedAdminAdds;
+    vector<PairedAdminCount> m_PairedAdminCounts;
+    vector<PairedAdminRemove> m_PairedAdminRemoves;
+    vector<PairedBanCount> m_PairedBanCounts;
+    vector<PairedBanRemove> m_PairedBanRemoves;
     std::string player;
     void EventPlayerBotCommand(string command, string payload);
 };

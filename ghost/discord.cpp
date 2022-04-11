@@ -145,7 +145,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
           FoundServer = true;
 
           if( (*i)->IsAdmin( Name ) )
-            SendChat( player, m_GHost->m_Language->UserIsAlreadyAnAdmin( Server, Name ) );
+            SendChat( m_GHost->m_Language->UserIsAlreadyAnAdmin( Server, Name ) );
           else
             m_PairedAdminAdds.push_back( PairedAdminAdd( player->GetName( ), m_GHost->m_DB->ThreadedAdminAdd( Server, Name ) ) );
 
@@ -154,7 +154,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
       }
 
       if( !FoundServer )
-        SendChat( player, m_GHost->m_Language->ValidServers( Servers ) );
+        SendChat( m_GHost->m_Language->ValidServers( Servers ) );
     }
   }
 
@@ -166,7 +166,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
   {
     if( Payload.empty( ) || Payload == "off" )
     {
-      SendChat( player, m_GHost->m_Language->AutoHostDisabled( ) );
+      SendChat( m_GHost->m_Language->AutoHostDisabled( ) );
       m_GHost->m_AutoHostGameName.clear( );
       m_GHost->m_AutoHostOwner.clear( );
       m_GHost->m_AutoHostServer.clear( );
@@ -209,7 +209,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
             if( Start != string :: npos )
               GameName = GameName.substr( Start );
 
-            SendChat( player, m_GHost->m_Language->AutoHostEnabled( ) );
+            SendChat( m_GHost->m_Language->AutoHostEnabled( ) );
             delete m_GHost->m_AutoHostMap;
             m_GHost->m_AutoHostMap = new CMap( *m_GHost->m_Map );
             m_GHost->m_AutoHostGameName = GameName;
@@ -235,7 +235,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
   {
     if( Payload.empty( ) || Payload == "off" )
     {
-      SendChat( player, m_GHost->m_Language->AutoHostDisabled( ) );
+      SendChat( m_GHost->m_Language->AutoHostDisabled( ) );
       m_GHost->m_AutoHostGameName.clear( );
       m_GHost->m_AutoHostOwner.clear( );
       m_GHost->m_AutoHostServer.clear( );
@@ -292,7 +292,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
                 if( Start != string :: npos )
                   GameName = GameName.substr( Start );
 
-                SendChat( player, m_GHost->m_Language->AutoHostEnabled( ) );
+                SendChat( m_GHost->m_Language->AutoHostEnabled( ) );
                 delete m_GHost->m_AutoHostMap;
                 m_GHost->m_AutoHostMap = new CMap( *m_GHost->m_Map );
                 m_GHost->m_AutoHostGameName = GameName;
@@ -354,16 +354,16 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
           FoundServer = true;
 
           if( (*i)->IsAdmin( Name ) )
-            SendChat( player, m_GHost->m_Language->UserIsAnAdmin( Server, Name ) );
+            SendChat( m_GHost->m_Language->UserIsAnAdmin( Server, Name ) );
           else
-            SendChat( player, m_GHost->m_Language->UserIsNotAnAdmin( Server, Name ) );
+            SendChat( m_GHost->m_Language->UserIsNotAnAdmin( Server, Name ) );
 
           break;
         }
       }
 
       if( !FoundServer )
-        SendChat( player, m_GHost->m_Language->ValidServers( Servers ) );
+        SendChat( m_GHost->m_Language->ValidServers( Servers ) );
     }
   }
 
@@ -410,16 +410,16 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
           CDBBan *Ban = (*i)->IsBannedName( Name );
 
           if( Ban )
-            SendChat( player, m_GHost->m_Language->UserWasBannedOnByBecause( Server, Name, Ban->GetDate( ), Ban->GetAdmin( ), Ban->GetReason( ) ) );
+            SendChat( m_GHost->m_Language->UserWasBannedOnByBecause( Server, Name, Ban->GetDate( ), Ban->GetAdmin( ), Ban->GetReason( ) ) );
           else
-            SendChat( player, m_GHost->m_Language->UserIsNotBanned( Server, Name ) );
+            SendChat( m_GHost->m_Language->UserIsNotBanned( Server, Name ) );
 
           break;
         }
       }
 
       if( !FoundServer )
-        SendChat( player, m_GHost->m_Language->ValidServers( Servers ) );
+        SendChat( m_GHost->m_Language->ValidServers( Servers ) );
     }
   }
 
@@ -495,7 +495,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
           FoundServer = true;
 
           if( !(*i)->IsAdmin( Name ) )
-            SendChat( player, m_GHost->m_Language->UserIsNotAnAdmin( Server, Name ) );
+            SendChat( m_GHost->m_Language->UserIsNotAnAdmin( Server, Name ) );
           else
             m_PairedAdminRemoves.push_back( PairedAdminRemove( player->GetName( ), m_GHost->m_DB->ThreadedAdminRemove( Server, Name ) ) );
 
@@ -504,7 +504,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
       }
 
       if( !FoundServer )
-        SendChat( player, m_GHost->m_Language->ValidServers( Servers ) );
+        SendChat( m_GHost->m_Language->ValidServers( Servers ) );
     }
   }
 
@@ -522,7 +522,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
 
   else if( Command == "disable" )
   {
-    SendChat( player, m_GHost->m_Language->BotDisabled( ) );
+    SendChat( m_GHost->m_Language->BotDisabled( ) );
     m_GHost->m_Enabled = false;
   }
 
@@ -536,17 +536,17 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
 
     if( Downloads == 0 )
     {
-      SendChat( player, m_GHost->m_Language->MapDownloadsDisabled( ) );
+      SendChat( m_GHost->m_Language->MapDownloadsDisabled( ) );
       m_GHost->m_AllowDownloads = 0;
     }
     else if( Downloads == 1 )
     {
-      SendChat( player, m_GHost->m_Language->MapDownloadsEnabled( ) );
+      SendChat( m_GHost->m_Language->MapDownloadsEnabled( ) );
       m_GHost->m_AllowDownloads = 1;
     }
     else if( Downloads == 2 )
     {
-      SendChat( player, m_GHost->m_Language->MapDownloadsConditional( ) );
+      SendChat( m_GHost->m_Language->MapDownloadsConditional( ) );
       m_GHost->m_AllowDownloads = 2;
     }
   }
@@ -557,7 +557,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
 
   else if( Command == "enable" )
   {
-    SendChat( player, m_GHost->m_Language->BotEnabled( ) );
+    SendChat( m_GHost->m_Language->BotEnabled( ) );
     m_GHost->m_Enabled = true;
   }
 
@@ -573,12 +573,12 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
 
     if( GameNumber < m_GHost->m_Games.size( ) )
     {
-      SendChat( player, m_GHost->m_Language->EndingGame( m_GHost->m_Games[GameNumber]->GetDescription( ) ) );
+      SendChat( m_GHost->m_Language->EndingGame( m_GHost->m_Games[GameNumber]->GetDescription( ) ) );
       CONSOLE_Print( "[GAME: " + m_GHost->m_Games[GameNumber]->GetGameName( ) + "] is over (admin ended game)" );
       m_GHost->m_Games[GameNumber]->StopPlayers( "was disconnected (admin ended game)" );
     }
     else
-      SendChat( player, m_GHost->m_Language->GameNumberDoesntExist( Payload ) );
+      SendChat( m_GHost->m_Language->GameNumberDoesntExist( Payload ) );
   }
 
   //
@@ -590,14 +590,14 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
     // only load files in the current directory just to be safe
 
     if( Payload.find( "/" ) != string :: npos || Payload.find( "\\" ) != string :: npos )
-      SendChat( player, m_GHost->m_Language->UnableToLoadReplaysOutside( ) );
+      SendChat( m_GHost->m_Language->UnableToLoadReplaysOutside( ) );
     else
     {
       string File = m_GHost->m_ReplayPath + Payload + ".w3g";
 
       if( UTIL_FileExists( File ) )
       {
-        SendChat( player, m_GHost->m_Language->LoadingReplay( File ) );
+        SendChat( m_GHost->m_Language->LoadingReplay( File ) );
         CReplay *Replay = new CReplay( );
         Replay->Load( File, false );
         Replay->ParseReplay( false );
@@ -605,7 +605,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
         delete Replay;
       }
       else
-        SendChat( player, m_GHost->m_Language->UnableToLoadReplayDoesntExist( File ) );
+        SendChat( m_GHost->m_Language->UnableToLoadReplayDoesntExist( File ) );
     }
   }
 
@@ -623,7 +623,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
     else
     {
       if( m_GHost->m_CurrentGame || !m_GHost->m_Games.empty( ) )
-        SendChat( player, m_GHost->m_Language->AtLeastOneGameActiveUseForceToShutdown( ) );
+        SendChat( m_GHost->m_Language->AtLeastOneGameActiveUseForceToShutdown( ) );
       else
         m_Exiting = true;
     }
@@ -638,9 +638,9 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
     uint32_t GameNumber = UTIL_ToUInt32( Payload ) - 1;
 
     if( GameNumber < m_GHost->m_Games.size( ) )
-      SendChat( player, m_GHost->m_Language->GameNumberIs( Payload, m_GHost->m_Games[GameNumber]->GetDescription( ) ) );
+      SendChat( m_GHost->m_Language->GameNumberIs( Payload, m_GHost->m_Games[GameNumber]->GetDescription( ) ) );
     else
-      SendChat( player, m_GHost->m_Language->GameNumberDoesntExist( Payload ) );
+      SendChat( m_GHost->m_Language->GameNumberDoesntExist( Payload ) );
   }
 
   //
@@ -650,9 +650,9 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
   else if( Command == "getgames" )
   {
     if( m_GHost->m_CurrentGame )
-      SendChat( player, m_GHost->m_Language->GameIsInTheLobby( m_GHost->m_CurrentGame->GetDescription( ), UTIL_ToString( m_GHost->m_Games.size( ) ), UTIL_ToString( m_GHost->m_MaxGames ) ) );
+      SendChat( m_GHost->m_Language->GameIsInTheLobby( m_GHost->m_CurrentGame->GetDescription( ), UTIL_ToString( m_GHost->m_Games.size( ) ), UTIL_ToString( m_GHost->m_MaxGames ) ) );
     else
-      SendChat( player, m_GHost->m_Language->ThereIsNoGameInTheLobby( UTIL_ToString( m_GHost->m_Games.size( ) ), UTIL_ToString( m_GHost->m_MaxGames ) ) );
+      SendChat( m_GHost->m_Language->ThereIsNoGameInTheLobby( UTIL_ToString( m_GHost->m_Games.size( ) ), UTIL_ToString( m_GHost->m_MaxGames ) ) );
   }
 
   //
@@ -669,7 +669,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
   else if( Command == "load" )
   {
     if( Payload.empty( ) )
-      SendChat( player, m_GHost->m_Language->CurrentlyLoadedMapCFGIs( m_GHost->m_Map->GetCFGFile( ) ) );
+      SendChat( m_GHost->m_Language->CurrentlyLoadedMapCFGIs( m_GHost->m_Map->GetCFGFile( ) ) );
     else
     {
       string FoundMapConfigs;
@@ -683,7 +683,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
         if( !exists( MapCFGPath ) )
         {
           CONSOLE_Print( "[ADMINGAME] error listing map configs - map config path doesn't exist" );
-          SendChat( player, m_GHost->m_Language->ErrorListingMapConfigs( ) );
+          SendChat( m_GHost->m_Language->ErrorListingMapConfigs( ) );
         }
         else
         {
@@ -719,23 +719,23 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
           }
 
           if( Matches == 0 )
-            SendChat( player, m_GHost->m_Language->NoMapConfigsFound( ) );
+            SendChat( m_GHost->m_Language->NoMapConfigsFound( ) );
           else if( Matches == 1 )
           {
             string File = LastMatch.filename( ).string( );
-            SendChat( player, m_GHost->m_Language->LoadingConfigFile( m_GHost->m_MapCFGPath + File ) );
+            SendChat( m_GHost->m_Language->LoadingConfigFile( m_GHost->m_MapCFGPath + File ) );
             CConfig MapCFG;
             MapCFG.Read( LastMatch.string( ) );
             m_GHost->m_Map->Load( &MapCFG, m_GHost->m_MapCFGPath + File );
           }
           else
-            SendChat( player, m_GHost->m_Language->FoundMapConfigs( FoundMapConfigs ) );
+            SendChat( m_GHost->m_Language->FoundMapConfigs( FoundMapConfigs ) );
         }
       }
       catch( const exception &ex )
       {
         CONSOLE_Print( string( "[ADMINGAME] error listing map configs - caught exception [" ) + ex.what( ) + "]" );
-        SendChat( player, m_GHost->m_Language->ErrorListingMapConfigs( ) );
+        SendChat( m_GHost->m_Language->ErrorListingMapConfigs( ) );
       }
     }
   }
@@ -749,7 +749,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
     // only load files in the current directory just to be safe
 
     if( Payload.find( "/" ) != string :: npos || Payload.find( "\\" ) != string :: npos )
-      SendChat( player, m_GHost->m_Language->UnableToLoadSaveGamesOutside( ) );
+      SendChat( m_GHost->m_Language->UnableToLoadSaveGamesOutside( ) );
     else
     {
       string File = m_GHost->m_SaveGamePath + Payload + ".w3z";
@@ -758,10 +758,10 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
       if( UTIL_FileExists( File ) )
       {
         if( m_GHost->m_CurrentGame )
-          SendChat( player, m_GHost->m_Language->UnableToLoadSaveGameGameInLobby( ) );
+          SendChat( m_GHost->m_Language->UnableToLoadSaveGameGameInLobby( ) );
         else
         {
-          SendChat( player, m_GHost->m_Language->LoadingSaveGame( File ) );
+          SendChat( m_GHost->m_Language->LoadingSaveGame( File ) );
           m_GHost->m_SaveGame->Load( File, false );
           m_GHost->m_SaveGame->ParseSaveGame( );
           m_GHost->m_SaveGame->SetFileName( File );
@@ -769,7 +769,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
         }
       }
       else
-        SendChat( player, m_GHost->m_Language->UnableToLoadSaveGameDoesntExist( File ) );
+        SendChat( m_GHost->m_Language->UnableToLoadSaveGameDoesntExist( File ) );
     }
   }
 
@@ -780,7 +780,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
   else if( Command == "map" )
   {
     if( Payload.empty( ) )
-      SendChat( player, m_GHost->m_Language->CurrentlyLoadedMapCFGIs( m_GHost->m_Map->GetCFGFile( ) ) );
+      SendChat( m_GHost->m_Language->CurrentlyLoadedMapCFGIs( m_GHost->m_Map->GetCFGFile( ) ) );
     else
     {
       string FoundMaps;
@@ -794,7 +794,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
         if( !exists( MapPath ) )
         {
           CONSOLE_Print( "[ADMINGAME] error listing maps - map path doesn't exist" );
-          SendChat( player, m_GHost->m_Language->ErrorListingMaps( ) );
+          SendChat( m_GHost->m_Language->ErrorListingMaps( ) );
         }
         else
         {
@@ -830,11 +830,11 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
           }
 
           if( Matches == 0 )
-            SendChat( player, m_GHost->m_Language->NoMapsFound( ) );
+            SendChat( m_GHost->m_Language->NoMapsFound( ) );
           else if( Matches == 1 )
           {
             string File = LastMatch.filename( ).string( );
-            SendChat( player, m_GHost->m_Language->LoadingConfigFile( File ) );
+            SendChat( m_GHost->m_Language->LoadingConfigFile( File ) );
 
             // hackhack: create a config file in memory with the required information to load the map
 
@@ -844,13 +844,13 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
             m_GHost->m_Map->Load( &MapCFG, File );
           }
           else
-            SendChat( player, m_GHost->m_Language->FoundMaps( FoundMaps ) );
+            SendChat( m_GHost->m_Language->FoundMaps( FoundMaps ) );
         }
       }
       catch( const exception &ex )
       {
         CONSOLE_Print( string( "[ADMINGAME] error listing maps - caught exception [" ) + ex.what( ) + "]" );
-        SendChat( player, m_GHost->m_Language->ErrorListingMaps( ) );
+        SendChat( m_GHost->m_Language->ErrorListingMaps( ) );
       }
     }
   }
@@ -917,7 +917,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
 
   else if( Command == "reload" )
   {
-    SendChat( player, m_GHost->m_Language->ReloadingConfigurationFiles( ) );
+    SendChat( m_GHost->m_Language->ReloadingConfigurationFiles( ) );
     m_GHost->ReloadConfigs( );
   }
 
@@ -963,7 +963,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
         if( GameNumber - 1 < m_GHost->m_Games.size( ) )
           m_GHost->m_Games[GameNumber - 1]->SendAllChat( "ADMIN: " + Message );
         else
-          SendChat( player, m_GHost->m_Language->GameNumberDoesntExist( UTIL_ToString( GameNumber ) ) );
+          SendChat( m_GHost->m_Language->GameNumberDoesntExist( UTIL_ToString( GameNumber ) ) );
       }
     }
   }
@@ -990,15 +990,15 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
     if( m_GHost->m_CurrentGame )
     {
       if( m_GHost->m_CurrentGame->GetCountDownStarted( ) )
-        SendChat( player, m_GHost->m_Language->UnableToUnhostGameCountdownStarted( m_GHost->m_CurrentGame->GetDescription( ) ) );
+        SendChat( m_GHost->m_Language->UnableToUnhostGameCountdownStarted( m_GHost->m_CurrentGame->GetDescription( ) ) );
       else
       {
-        SendChat( player, m_GHost->m_Language->UnhostingGame( m_GHost->m_CurrentGame->GetDescription( ) ) );
+        SendChat( m_GHost->m_Language->UnhostingGame( m_GHost->m_CurrentGame->GetDescription( ) ) );
         m_GHost->m_CurrentGame->SetExiting( true );
       }
     }
     else
-      SendChat( player, m_GHost->m_Language->UnableToUnhostGameNoGameInLobby( ) );
+      SendChat( m_GHost->m_Language->UnableToUnhostGameNoGameInLobby( ) );
   }
 
   //

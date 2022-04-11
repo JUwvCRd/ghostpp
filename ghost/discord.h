@@ -43,7 +43,7 @@ class CDiscord {
     void EventPlayerBotCommand(string command, string payload);
 
   private:
-    std::function<void(const dpp::log_t&)> dpp_logger()
+    std::function<void(const dpp::log_t&)> dpp_logger();
 };
 
 #endif

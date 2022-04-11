@@ -89,7 +89,7 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t channel_id) {
 }
 
 void CDiscord::SendChat(string message) {
-  bot.message_create(dpp::message(channel_id, message));
+  this->bot.message_create(dpp::message(channel_id, message));
 }
 
 void CDiscord::EventPlayerBotCommand(string command, string payload) {

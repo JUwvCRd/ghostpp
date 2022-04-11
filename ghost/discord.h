@@ -31,7 +31,7 @@ class CDiscord {
     dpp::snowflake channel_id;
     CGHost *m_GHost;
     std::string player;
-    void EventPlayerBotCommand(string player, string command, string payload);
+    void EventPlayerBotCommand(string command, string payload);
 }
 
 #endif

@@ -355,8 +355,8 @@ int main( int argc, char **argv )
 
 	gGHost = new CGHost( &CFG );
 
-	string gDiscordBotToken = CFG->GetString("discord_bot_token", string());
-	uint64_t gDiscordChannelId = std::stoull(CFG->GetString("discord_channel_id", "0"), NULL, 10);
+	string gDiscordBotToken = CFG.GetString("discord_bot_token", string());
+	uint64_t gDiscordChannelId = std::stoull(CFG.GetString("discord_channel_id", "0"), NULL, 10);
 
 	if (gDiscordBotToken.length() > 0) {
 		CONSOLE_Print("[DISCORD] Listening to Discord channel " + gDiscordChannelId);

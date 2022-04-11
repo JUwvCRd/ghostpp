@@ -359,7 +359,7 @@ int main( int argc, char **argv )
 	uint64_t gDiscordChannelId = std::stoull(CFG.GetString("discord_channel_id", "0"), NULL, 10);
 
 	if (gDiscordBotToken.length() > 0) {
-		CONSOLE_Print("[DISCORD] Listening to Discord channel " + gDiscordChannelId);
+		CONSOLE_Print("[DISCORD] Listening to Discord channel " + std::to_string(gDiscordChannelId));
 		std::unique_ptr<CDiscord> gDiscord = std::make_unique<CDiscord>(gGHost, gDiscordBotToken, gDiscordChannelId);
 	}
 

@@ -51,7 +51,7 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t channel_id) {
 
   player = "";
 
-  bot.on_message_create([&](const dpp::message_create_t & event) {
+  bot->on_message_create([&](const dpp::message_create_t & event) {
     if (event.msg.channel_id == 0) {
       return;
     }
@@ -71,7 +71,7 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t channel_id) {
     }
 
     if (player.length() < 1) {
-      bot.message_create(dpp::message(event.msg.channel_id, "Please set your username.\nCommand: /player <name>"));
+      bot->message_create(dpp::message(event.msg.channel_id, "Please set your username.\nCommand: /player <name>"));
       return;
     }
 
@@ -85,11 +85,11 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t channel_id) {
     EventPlayerBotCommand(command, payload);
   });
 
-  bot.start(false); 
+  bot->start(false); 
 }
 
 void CDiscord::SendChat(string message) {
-  bot.message_create(dpp::message(channel_id, message));
+  bot->message_create(dpp::message(channel_id, message));
 }
 
 void CDiscord::EventPlayerBotCommand(string command, string payload) {

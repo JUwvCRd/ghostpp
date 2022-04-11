@@ -29,7 +29,7 @@ class CDiscord {
     void SendChat(string message);
 
   protected:
-    dpp::cluster bot;
+    dpp::cluster* bot;
     dpp::snowflake channel_id;
     CGHost *m_GHost;
     std::string player;

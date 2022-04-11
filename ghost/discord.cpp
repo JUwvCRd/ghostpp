@@ -44,7 +44,7 @@
 
 using namespace boost::filesystem;
 
-CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t channel_id) {
+void CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t channel_id) {
   m_GHost = nGHost;
 
 	dpp::cluster bot(token, dpp::i_default_intents | dpp::i_message_content);
@@ -88,11 +88,11 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t channel_id) {
   bot.start(false); 
 }
 
-CDiscord::SendChat(string message) {
+void CDiscord::SendChat(string message) {
   bot.message_create(dpp::message(channel_id, message));
 }
 
-CDiscord::EventPlayerBotCommand(string player, string command, string payload) {
+void CDiscord::EventPlayerBotCommand(string player, string command, string payload) {
 	string User = player;
 	string Command = command;
 	string Payload = payload;

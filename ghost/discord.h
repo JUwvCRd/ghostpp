@@ -34,6 +34,6 @@ class CDiscord {
     CGHost *m_GHost;
     std::string player;
     void EventPlayerBotCommand(string command, string payload);
-}
+};
 
 #endif

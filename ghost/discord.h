@@ -31,6 +31,7 @@ class CDiscord {
   protected:
     dpp::cluster bot;
     dpp::snowflake channel_id;
+    bool m_Exiting;
     CGHost *m_GHost;
     vector<PairedAdminAdd> m_PairedAdminAdds;
     vector<PairedAdminCount> m_PairedAdminCounts;

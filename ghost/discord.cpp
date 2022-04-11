@@ -147,7 +147,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
           if( (*i)->IsAdmin( Name ) )
             SendChat( m_GHost->m_Language->UserIsAlreadyAnAdmin( Server, Name ) );
           else
-            m_PairedAdminAdds.push_back( PairedAdminAdd( player->GetName( ), m_GHost->m_DB->ThreadedAdminAdd( Server, Name ) ) );
+            m_PairedAdminAdds.push_back( PairedAdminAdd( player, m_GHost->m_DB->ThreadedAdminAdd( Server, Name ) ) );
 
           break;
         }
@@ -435,7 +435,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
       Server = m_GHost->m_BNETs[0]->GetServer( );
 
     if( !Server.empty( ) )
-      m_PairedAdminCounts.push_back( PairedAdminCount( player->GetName( ), m_GHost->m_DB->ThreadedAdminCount( Server ) ) );
+      m_PairedAdminCounts.push_back( PairedAdminCount( player, m_GHost->m_DB->ThreadedAdminCount( Server ) ) );
   }
 
   //
@@ -450,7 +450,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
       Server = m_GHost->m_BNETs[0]->GetServer( );
 
     if( !Server.empty( ) )
-      m_PairedBanCounts.push_back( PairedBanCount( player->GetName( ), m_GHost->m_DB->ThreadedBanCount( Server ) ) );
+      m_PairedBanCounts.push_back( PairedBanCount( player, m_GHost->m_DB->ThreadedBanCount( Server ) ) );
   }
 
   //
@@ -497,7 +497,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
           if( !(*i)->IsAdmin( Name ) )
             SendChat( m_GHost->m_Language->UserIsNotAnAdmin( Server, Name ) );
           else
-            m_PairedAdminRemoves.push_back( PairedAdminRemove( player->GetName( ), m_GHost->m_DB->ThreadedAdminRemove( Server, Name ) ) );
+            m_PairedAdminRemoves.push_back( PairedAdminRemove( player, m_GHost->m_DB->ThreadedAdminRemove( Server, Name ) ) );
 
           break;
         }
@@ -514,7 +514,7 @@ void CDiscord::EventPlayerBotCommand(string command, string payload) {
   //
 
   else if( ( Command == "delban" || Command == "unban" ) && !Payload.empty( ) )
-    m_PairedBanRemoves.push_back( PairedBanRemove( player->GetName( ), m_GHost->m_DB->ThreadedBanRemove( Payload ) ) );
+    m_PairedBanRemoves.push_back( PairedBanRemove( player, m_GHost->m_DB->ThreadedBanRemove( Payload ) ) );
 
   //
   // !DISABLE

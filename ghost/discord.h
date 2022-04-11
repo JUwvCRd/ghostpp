@@ -25,8 +25,8 @@
 
 class CDiscord {
   public:
-    CDiscord(CGHost *nGHost, string &token, uint64_t channel_id);
-    void SendChat(string &message);
+    CDiscord(CGHost *nGHost, string token, uint64_t channel_id);
+    void SendChat(string message);
 
   protected:
     dpp::cluster bot;

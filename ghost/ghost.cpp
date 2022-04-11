@@ -355,12 +355,13 @@ int main( int argc, char **argv )
 
 	gGHost = new CGHost( &CFG );
 
+	std::unique_ptr<CDiscord> gDiscord;
 	string gDiscordBotToken = CFG.GetString("discord_bot_token", string());
 	uint64_t gDiscordChannelId = std::stoull(CFG.GetString("discord_channel_id", "0"), NULL, 10);
 
 	if (gDiscordBotToken.length() > 0) {
 		CONSOLE_Print("[DISCORD] Listening to Discord channel " + std::to_string(gDiscordChannelId));
-		std::unique_ptr<CDiscord> gDiscord = std::make_unique<CDiscord>(gGHost, gDiscordBotToken, gDiscordChannelId);
+		gDiscord = std::make_unique<CDiscord>(gGHost, gDiscordBotToken, gDiscordChannelId);
 	}
 
 	while( 1 )

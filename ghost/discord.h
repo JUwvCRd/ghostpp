@@ -25,14 +25,14 @@
 
 class CDiscord {
   public:
-    CDiscord(CGHost *nGHost, string token, uint64_t channel_id);
+    CDiscord(CGHost* nGHost, string& token, uint64_t channel_id);
     void SendChat(string message);
 
   protected:
     dpp::cluster bot;
     dpp::snowflake channel_id;
     bool m_Exiting;
-    CGHost *m_GHost;
+    CGHost* m_GHost;
     vector<PairedAdminAdd> m_PairedAdminAdds;
     vector<PairedAdminCount> m_PairedAdminCounts;
     vector<PairedAdminRemove> m_PairedAdminRemoves;

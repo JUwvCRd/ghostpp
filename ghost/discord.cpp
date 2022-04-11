@@ -69,7 +69,7 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t _channel_id) {
       return;
     }
 
-    if (command.at(0) != '/') {
+    if (command.at(0) != '!') {
       return;
     }
 
@@ -82,11 +82,11 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t _channel_id) {
 
     if (command == "player") {
       player = payload;
-      bot->message_create(dpp::message(event.msg.channel_id, "Username set: " + player));
+      bot->message_create(dpp::message(event.msg.channel_id, "Username set: \n" + player + "\""));
     }
 
-    if (player.length() < 1 && command != "player") {
-      bot->message_create(dpp::message(event.msg.channel_id, "Please set your username.\nCommand: /player <name>"));
+    if (player.length() < 1) {
+      bot->message_create(dpp::message(event.msg.channel_id, "Please set your username.\nCommand: !player <name>"));
       return;
     }
 

@@ -21,6 +21,8 @@
 #ifndef DISCORD_H
 #define DISCORD_H
 
+#include <dpp/dpp.h>
+
 class CDiscord {
   public:
     CDiscord(CGHost *nGHost, string token, uint64_t channel_id);

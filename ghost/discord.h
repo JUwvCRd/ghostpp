@@ -41,6 +41,9 @@ class CDiscord {
     vector<PairedBanRemove> m_PairedBanRemoves;
     std::string player;
     void EventPlayerBotCommand(string command, string payload);
+
+  private:
+    std::function<void(const dpp::log_t&)> dpp_logger()
 };
 
 #endif

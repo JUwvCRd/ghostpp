@@ -52,7 +52,7 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t _channel_id) {
 
   player = "";
 
-  bot->on_log(dpp::utility::cout_logger());
+  bot->on_log(dpp_logger());
 
   bot->on_message_create([&](const dpp::message_create_t &event) {
     if (event.msg.channel_id != channel_id) {
@@ -102,6 +102,14 @@ CDiscord::~CDiscord() {
 
 void CDiscord::SendChat(string message) {
   bot->message_create(dpp::message(channel_id, message));
+}
+
+std::function<void(const dpp::log_t&)> CDiscord::dpp_logger() {
+  return [&](const dpp::log_t& event) {
+    if (event.severity > dpp::ll_trace) {
+      CONSOLE_Print("[DISCORD] " + dpp::utility::loglevel(event.severity) + ": " + event.message);
+    }
+  };
 }
 
 void CDiscord::EventPlayerBotCommand(string command, string payload) {

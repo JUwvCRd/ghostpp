@@ -39,6 +39,7 @@
 #include "game_base.h"
 #include "game.h"
 #include "game_admin.h"
+#include "discord.h"
 
 #include <signal.h>
 #include <stdlib.h>
@@ -674,6 +675,7 @@ CGHost :: CGHost( CConfig *CFG )
 	LoadIPToCountryData( );
 
 	// create the admin game
+	new CDiscord(this, "token", "channel_id");
 
 	if( m_AdminGameCreate )
 	{

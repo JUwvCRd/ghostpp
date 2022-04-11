@@ -82,7 +82,7 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t _channel_id) {
 
     if (command == "player") {
       player = payload;
-      bot->message_create(dpp::message(event.msg.channel_id, "Username set: \n" + player + "\""));
+      bot->message_create(dpp::message(event.msg.channel_id, "Username set: \"" + player + "\""));
     }
 
     if (player.length() < 1) {

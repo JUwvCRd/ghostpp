@@ -30,7 +30,7 @@ class CDiscord {
     void SendChat(string message);
 
   protected:
-    dpp::cluster *bot;
+    std::unique_ptr<dpp::cluster> bot;
     dpp::snowflake channel_id;
     bool m_Exiting;
     CGHost *m_GHost;

@@ -47,7 +47,7 @@ using namespace boost::filesystem;
 CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t _channel_id) {
   m_GHost = nGHost;
 
-	bot = new dpp::cluster(token, dpp::i_default_intents | dpp::i_message_content);
+	bot = std::make_unique<dpp::cluster>(token, dpp::i_default_intents | dpp::i_message_content);
   channel_id = _channel_id;
 
   player = "";
@@ -74,7 +74,7 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t _channel_id) {
     }
 
     std::size_t payload_start_pos = event.msg.content.find(" ");
-    if (payload_start_pos != std::string::npos) {
+    if (payload_start_pos != std::string::npos && payload_start_pos + 1 < event.msg.content.length()) {
       payload = event.msg.content.substr(payload_start_pos + 1);
     }
 
@@ -94,10 +94,6 @@ CDiscord::CDiscord(CGHost *nGHost, string token, uint64_t _channel_id) {
   });
 
   bot->start(true);
-}
-
-CDiscord::~CDiscord() {
-  delete bot;
 }
 
 void CDiscord::SendChat(string message) {

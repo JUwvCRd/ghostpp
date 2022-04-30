@@ -35,6 +35,7 @@
 
 #include <cmath>
 #include <string.h>
+#include <random>
 #include <time.h>
 
 #include "next_combination.h"
